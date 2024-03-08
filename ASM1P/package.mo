@@ -1146,7 +1146,7 @@ end DeniCascade;
     model controller_WWTP
       output Real Q_int, Q_r, Q_w "water/sludge flow, m3/d";
       output Real Q_air_R1, Q_air_R2, Q_air_R3, Q_air_R4, Q_air_R5 "air flow, m3/d";
-      ASM.InPipe In1, In2, In3, In4, In5;
+      InPipe In1, In2, In3, In4, In5;
       //controlling aeration
       parameter Real SP_NH = 3 "setpoint S.NH, gN/m3";
       Real SP_O2 "setpoint O2, gO2/m3";
