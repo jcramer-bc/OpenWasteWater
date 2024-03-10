@@ -455,7 +455,7 @@ package ASM1P "Component models for the Activated Sludge Model No.1 with P-preci
   model Inflow "inflow ASM1"
     extends OpenWasteWater.Icons.WWSource;
     parameter Real T = 15 "°C";
-    parameter String Inf_File = "Resources/ASM1P/Inf_strm_P.txt";
+    parameter String Inf_File = Modelica.Utilities.Files.loadResource("modelica://OpenWasteWater/Resources/ASM1P/Inf_strm_P.txt");
     Modelica.Blocks.Sources.CombiTimeTable T_data(tableOnFile = true, fileName = Inf_File, smoothness = Modelica.Blocks.Types.Smoothness.ContinuousDerivative, extrapolation = Modelica.Blocks.Types.Extrapolation.Periodic, tableName = "t_data", columns = {2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16}, startTime = 0.0, timeScale = 1, offset = {0}, verboseRead = true);
     OutPipe Out1 annotation(
       Placement(visible = true, transformation(origin = {98, -70}, extent = {{-10, -10}, {10, 10}}, rotation = 0), iconTransformation(origin = {98, -70}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
@@ -2064,7 +2064,7 @@ end DeniCascade;
     end WWTP_COST;
 
     model WWTP_BWWT
-      OpenWasteWater.ASM1P.Inflow Inf(Inf_File = "/home/awwjb/Git/OpenWasteWater/Resources/ASM1P/Inf_strm_P.txt", T = 20) annotation(
+      OpenWasteWater.ASM1P.Inflow Inf(Inf_File = Modelica.Utilities.Files.loadResource("modelica://OpenWasteWater/Resources/ASM1P/Inf_strm_P.txt"), T = 20) annotation(
         Placement(visible = true, transformation(origin = {-90, 88}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
       OpenWasteWater.ASM1P.Mixer3 M1 annotation(
         Placement(visible = true, transformation(origin = {-64, 78}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
@@ -2184,7 +2184,7 @@ end DeniCascade;
         Placement(visible = true, transformation(origin = {82, -80}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
       OpenWasteWater.ASM1P.Effluent Eff annotation(
         Placement(visible = true, transformation(origin = {90, 24}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
-      OpenWasteWater.ASM1P.Inflow Inflow1(Inf_File = "/home/awwjb/Git/OpenWasteWater/Resources/ASM1P/Inf_Raw_dry_P.txt") annotation(
+      OpenWasteWater.ASM1P.Inflow Inflow1(Inf_File = Modelica.Utilities.Files.loadResource("modelica://OpenWasteWater/Resources/ASM1P/Inf_Raw_dry_P.txt")) annotation(
         Placement(visible = true, transformation(origin = {-82, 82}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
       OpenWasteWater.ASM1P.SedTank.PreClar Vorklaerung annotation(
         Placement(visible = true, transformation(origin = {-46, 74}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
@@ -2276,7 +2276,7 @@ end DeniCascade;
     end WWTP_ADM;
 
     model Test
-      OpenWasteWater.ASM1P.Inflow Inf1(Inf_File = "/home/awwjb/Git/OpenWasteWater/Resources/ASM1P/Inf_strm_P.txt") annotation(
+      OpenWasteWater.ASM1P.Inflow Inf1(Inf_File = Modelica.Utilities.Files.loadResource("modelica://OpenWasteWater/Resources/ASM1P/Inf_strm_P.txt")) annotation(
         Placement(visible = true, transformation(origin = {-70, 76}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
       OpenWasteWater.ASM1P.Effluent Effluent1 annotation(
         Placement(visible = true, transformation(origin = {84, -46}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
@@ -2381,7 +2381,7 @@ end DeniCascade;
         Placement(visible = true, transformation(origin = {76, 26}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
       OpenWasteWater.ASM1P.Sub_WWTP_Modells.WWTP_Part wWTP_Part annotation(
         Placement(visible = true, transformation(origin = {-16, 76}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
-      Inflow inflow(Inf_File = "/home/awwjb/Git/OpenWasteWater/Resources/ASM1P/Inf_dry_P.txt") annotation(
+      Inflow inflow(Inf_File = Modelica.Utilities.Files.loadResource("modelica://OpenWasteWater/Resources/ASM1P/Inf_dry_P.txt")) annotation(
         Placement(visible = true, transformation(origin = {-70, 84}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
   OpenWasteWater.ADM_P.inflow_ASM inflow_ADM1 annotation(
         Placement(visible = true, transformation(origin = {-42, 28}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));

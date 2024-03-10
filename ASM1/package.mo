@@ -232,7 +232,7 @@ package ASM1 "Component models for the Activated Sludge Model No.1"
       Placement(transformation(extent = {{90, -5}, {110, 15}}, rotation = 0)));
   equation
     0 = Out1.Q + In1.Q + In2.Q;
-  //  Out1.T = In1.T;
+//  Out1.T = In1.T;
     0 = Out1.T   * Out1.Q + In1.T   * In1.Q + In2.T   * In2.Q;
     0 = Out1.S.I * Out1.Q + In1.S.I * In1.Q + In2.S.I * In2.Q;
     0 = Out1.S.S * Out1.Q + In1.S.S * In1.Q + In2.S.S * In2.Q;
@@ -409,7 +409,7 @@ package ASM1 "Component models for the Activated Sludge Model No.1"
   model Inflow "inflow ASM1"
     extends OpenWasteWater.Icons.WWSource;
     parameter Real T = 15 "°C";
-    parameter String Inf_File = "Resources/ASM1/Inf_strm.txt";
+    parameter String Inf_File = Modelica.Utilities.Files.loadResource("modelica://OpenWasteWater/Resources/ASM1/Inf_strm.txt");
     Modelica.Blocks.Sources.CombiTimeTable T_data(tableOnFile = true, fileName = Inf_File, smoothness = Modelica.Blocks.Types.Smoothness.ContinuousDerivative, extrapolation = Modelica.Blocks.Types.Extrapolation.Periodic, tableName = "t_data", columns = {2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15}, startTime = 0.0, timeScale = 1, offset = {0}, verboseRead = true);
     OutPipe Out1 annotation(
       Placement(visible = true, transformation(origin = {98, -70}, extent = {{-10, -10}, {10, 10}}, rotation = 0), iconTransformation(origin = {98, -70}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
@@ -1753,7 +1753,7 @@ end DeniCascade;
 
   package WWTP_Examples
     model WWTP_COST
-      OpenWasteWater.ASM1.Inflow Inf(T = 15, Inf_File = "/home/awwjb/Git/OpenWasteWater/Resources/ASM1/Inf_strm.txt") annotation(
+      OpenWasteWater.ASM1.Inflow Inf(T = 15, Inf_File = Modelica.Utilities.Files.loadResource("modelica://OpenWasteWater/Resources/ASM1/Inf_strm.txt")) annotation(
         Placement(visible = true, transformation(origin = {-90, 88}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
       OpenWasteWater.ASM1.Mixer3 M1 annotation(
         Placement(visible = true, transformation(origin = {-64, 78}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
@@ -1775,11 +1775,11 @@ end DeniCascade;
         Placement(visible = true, transformation(origin = {66, 50}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
       OpenWasteWater.ASM1.TechUnits.controller PLS(Q_REC = 20000, Q_RS = 18446, Q_WS = 350, Q_air_N3 = 10000, k_D_O2 = 0, k_I_NO = 5000, k_I_O2 = 5000, k_P_NO = 2000, k_P_O2 = 2500) annotation(
         Placement(visible = true, transformation(origin = {36, 14}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
-      OpenWasteWater.ASM1.TechUnits.Pump REC_Pump(Qmax = 92239) annotation(
+      OpenWasteWater.ASM1.TechUnits.Pump REC_Pump(Qmax = 55338, Qmin = 55338, Qini = 55338) annotation(
         Placement(visible = true, transformation(origin = {-56, 46}, extent = {{10, -10}, {-10, 10}}, rotation = 0)));
-      OpenWasteWater.ASM1.TechUnits.Pump RS_Pump annotation(
+      OpenWasteWater.ASM1.TechUnits.Pump RS_Pump(Qmax = 18446, Qmin = 18446, Qini = 18446)  annotation(
         Placement(visible = true, transformation(origin = {-36, -62}, extent = {{10, -10}, {-10, 10}}, rotation = 0)));
-      OpenWasteWater.ASM1.TechUnits.Pump WS_Pump annotation(
+      OpenWasteWater.ASM1.TechUnits.Pump WS_Pump(Qmax = 385, Qmin = 385, Qini = 385)  annotation(
         Placement(visible = true, transformation(origin = {44, -64}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
       OpenWasteWater.ASM1.SecClar.SCL SC annotation(
         Placement(visible = true, transformation(origin = {4, -22}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
@@ -1859,7 +1859,7 @@ end DeniCascade;
     end WWTP_COST;
 
     model WWTP_BWWT
-      OpenWasteWater.ASM1.Inflow Inf(Inf_File = "/home/awwjb/Git/OpenWasteWater/Resources/ASM1/Inf_strm.txt", T = 20) annotation(
+      OpenWasteWater.ASM1.Inflow Inf(T = 20, Inf_File = Modelica.Utilities.Files.loadResource("modelica://OpenWasteWater/Resources/ASM1/Inf_strm.txt")) annotation(
         Placement(visible = true, transformation(origin = {-90, 88}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
       OpenWasteWater.ASM1.Mixer3 M1 annotation(
         Placement(visible = true, transformation(origin = {-64, 78}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
@@ -1969,7 +1969,7 @@ end DeniCascade;
         Placement(visible = true, transformation(origin = {82, -80}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
       OpenWasteWater.ASM1.Effluent Eff annotation(
         Placement(visible = true, transformation(origin = {90, 24}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
-      OpenWasteWater.ASM1.Inflow Inflow1(Inf_File = "/home/awwjb/Git/OpenWasteWater/Resources/ASM1/Inf_Raw_strm.txt") annotation(
+      OpenWasteWater.ASM1.Inflow Inflow1(Inf_File = Modelica.Utilities.Files.loadResource("modelica://OpenWasteWater/Resources/ASM1/Inf_Raw_strm.txt")) annotation(
         Placement(visible = true, transformation(origin = {-82, 82}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
       OpenWasteWater.ASM1.SedTank.PreClar Vorklaerung annotation(
         Placement(visible = true, transformation(origin = {-46, 74}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
@@ -2059,7 +2059,7 @@ end DeniCascade;
     end WWTP_ADM;
 
     model Test
-      OpenWasteWater.ASM1.Inflow Inf1(Inf_File = "/home/awwjb/Dokumente/modellieren/modelica/OpenWasteWater/Resources/ASM1/Inf_strm.txt") annotation(
+      OpenWasteWater.ASM1.Inflow Inf1(Inf_File = Modelica.Utilities.Files.loadResource("modelica://OpenWasteWater/Resources/ASM1/Inf_strm.txt")) annotation(
         Placement(visible = true, transformation(origin = {-70, 76}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
       OpenWasteWater.ASM1.Effluent Effluent1 annotation(
         Placement(visible = true, transformation(origin = {84, -46}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
@@ -2153,7 +2153,7 @@ end DeniCascade;
         Placement(visible = true, transformation(origin = {82, -80}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
       OpenWasteWater.ASM1.Effluent Eff annotation(
         Placement(visible = true, transformation(origin = {90, 24}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
-      OpenWasteWater.ASM1.Inflow Inflow1(Inf_File = "/home/awwjb/Git/OpenWasteWater/Resources/ASM1/Inf_Raw_strm.txt") annotation(
+      OpenWasteWater.ASM1.Inflow Inflow1(Inf_File = Modelica.Utilities.Files.loadResource("modelica://OpenWasteWater/Resources/ASM1/Inf_Raw_strm.txt")) annotation(
         Placement(visible = true, transformation(origin = {-82, 82}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
       OpenWasteWater.ASM1.SedTank.PreClar Vorklaerung annotation(
         Placement(visible = true, transformation(origin = {-46, 74}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
@@ -2175,9 +2175,9 @@ end DeniCascade;
         Placement(visible = true, transformation(origin = {-2, -54}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
       OpenWasteWater.ASM1.TechUnits.VolumeControl volumeControl1(SP_Q_max = 80, SP_Q_min = 50, SP_V = 20, k_D_Q = 0.5, k_I_Q = 2, k_P_Q = 1) annotation(
         Placement(visible = true, transformation(origin = {-22, -36}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
-      ADM.inflow_ASM inflow_ADM1 annotation(
+      ADM.inflow_ASM1 inflow_ADM1 annotation(
         Placement(visible = true, transformation(origin = {24, -50}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
-      OpenWasteWater.ADM.outflow_ASM outflow_ASM1 annotation(
+      OpenWasteWater.ADM.outflow_ASM1 outflow_ASM1 annotation(
         Placement(visible = true, transformation(origin = {-30, -86}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
       ADM.adm_models.ADM1 ADM1(Gini = OpenWasteWater.ADM.Gaseous_ADM(CO2 = 14.6, H2 = 0.0037, NH3 = 0.005, CH4 = 1646.0), Sini = OpenWasteWater.ADM.Solubles_ADM(su = 11.5, aa = 5.4, fa = 100.0, va = 10.5, bu = 14.3, pro = 16.85, ac = 44.0, H2 = 0.00024, ch4 = 130, IC = 55.5, IN = 660.0, I = 5700.0), V_D = 1200, V_H = 120, Xini = OpenWasteWater.ADM.Particulates_ADM(c = 5500, ch = 53, pr = 54, li = 67, su = 835, aa = 630, fa = 560, c4 = 273, pro = 129, ac = 820, H2 = 390, I = 34000)) annotation(
         Placement(visible = true, transformation(origin = {58, -50}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));

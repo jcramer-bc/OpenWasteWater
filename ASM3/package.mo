@@ -483,7 +483,7 @@ package ASM3 "Component models for the Activated Sludge Model No.3"
   model Inflow "inflow ASM1"
     extends OpenWasteWater.Icons.WWSource;
     extends WWParameters;
-    parameter String Inf_File = "Resources/ASM3/Inf_strm.txt";
+    parameter String Inf_File = Modelica.Utilities.Files.loadResource("modelica://OpenWasteWater/Resources/ASM3/Inf_strm.txt");
     parameter Real T = 15 "°C";
     parameter Real gain = 1.0 "Scale factor towards COST reference";
     Modelica.Blocks.Sources.CombiTimeTable T_data(tableOnFile = true, fileName = Inf_File, smoothness = Modelica.Blocks.Types.Smoothness.ContinuousDerivative, extrapolation = Modelica.Blocks.Types.Extrapolation.Periodic, tableName = "t_data", columns = {2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15}, startTime = 0.0, timeScale = 1, offset = {0}, verboseRead = true);
@@ -530,7 +530,7 @@ package ASM3 "Component models for the Activated Sludge Model No.3"
   model InflowTV "inflow ASM1"
     extends OpenWasteWater.Icons.WWSource;
     extends WWParameters;
-    parameter String Inf_File = "Resources/ASM3/Inf_strm.txt";
+    parameter String Inf_File = Modelica.Utilities.Files.loadResource("modelica://OpenWasteWater/Resources/ASM3/Inf_strm.txt");
     parameter Real gain = 1.0 "Scale factor towards COST reference";
     Modelica.Blocks.Sources.CombiTimeTable T_data(tableOnFile = true, fileName = Inf_File, smoothness = Modelica.Blocks.Types.Smoothness.ConstantSegments, extrapolation = Modelica.Blocks.Types.Extrapolation.Periodic, tableName = "t_data", columns = {2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16}, startTime = 0.0, timeScale = 1, offset = {0}, verboseRead = true);
     OpenWasteWater.ASM3.OutPipe Out1 annotation(
@@ -1933,7 +1933,7 @@ package ASM3 "Component models for the Activated Sludge Model No.3"
 
   package WWTP_Examples
     model WWTP_COST
-      OpenWasteWater.ASM3.Inflow Inf(Inf_File = "/home/awwjb/Dokumente/modellieren/modelica/LastWorkingOWW/OpenWasteWater/Resources/ASM3/Inf_rain.txt", T = 15) annotation(
+      OpenWasteWater.ASM3.Inflow Inf(Inf_File = Modelica.Utilities.Files.loadResource("modelica://OpenWasteWater/Resources/ASM3/Inf_strm.txt"), T = 15) annotation(
         Placement(visible = true, transformation(origin = {-90, 88}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
       OpenWasteWater.ASM3.Mixer3 M1 annotation(
         Placement(visible = true, transformation(origin = {-64, 78}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
@@ -2043,7 +2043,7 @@ package ASM3 "Component models for the Activated Sludge Model No.3"
         Placement(visible = true, transformation(origin = {82, -80}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
       OpenWasteWater.ASM3.Effluent Eff annotation(
         Placement(visible = true, transformation(origin = {90, 24}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
-      OpenWasteWater.ASM3.Inflow Inflow1(Inf_File = "/home/awwjb/Git/OpenWasteWater/Resources/ASM3/Inf_Raw_strm.txt") annotation(
+      OpenWasteWater.ASM3.Inflow Inflow1(Inf_File = Modelica.Utilities.Files.loadResource("modelica://OpenWasteWater/Resources/ASM3/Inf_Raw_strm.txt")) annotation(
         Placement(visible = true, transformation(origin = {-82, 82}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
       OpenWasteWater.ASM3.SedTank.PreClar Vorklaerung annotation(
         Placement(visible = true, transformation(origin = {-46, 74}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
@@ -2133,7 +2133,7 @@ package ASM3 "Component models for the Activated Sludge Model No.3"
     end WWTP_ADM;
 
     model Test
-      OpenWasteWater.ASM3.Inflow Inflow3(Inf_File = "/home/awwjb/Git/OpenWasteWater/Resources/ASM3/Inf_Raw_strm.txt") annotation(
+      OpenWasteWater.ASM3.Inflow Inflow3(Inf_File = Modelica.Utilities.Files.loadResource("modelica://OpenWasteWater/Resources/ASM3/Inf_Raw_strm.txt")) annotation(
         Placement(visible = true, transformation(origin = {-88, 74}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
       OpenWasteWater.ASM3.Sub_WWTP_Modells.WWTP_Part WWTP_Part3 annotation(
         Placement(visible = true, transformation(origin = {20, 30}, extent = {{-34, -34}, {34, 34}}, rotation = 0)));
@@ -2186,7 +2186,7 @@ package ASM3 "Component models for the Activated Sludge Model No.3"
     end Test;
 
     model WWTP_COST_Cascade
-      OpenWasteWater.ASM3.Inflow Inf(Inf_File = "/home/awwjb/Git/OpenWasteWater/Resources/ASM3/Inf_rain.txt", T = 15) annotation(
+      OpenWasteWater.ASM3.Inflow Inf(Inf_File = Modelica.Utilities.Files.loadResource("modelica://OpenWasteWater/Resources/ASM3/Inf_rain.txt"), T = 15) annotation(
         Placement(visible = true, transformation(origin = {-90, 88}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
       OpenWasteWater.ASM3.Mixer3 M1 annotation(
         Placement(visible = true, transformation(origin = {-64, 78}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
@@ -2288,7 +2288,7 @@ package ASM3 "Component models for the Activated Sludge Model No.3"
     end WWTP_COST_Cascade;
 
     model WWTP_Alternate
-      OpenWasteWater.ASM3.Inflow Inf(Inf_File = "/home/awwjb/Dokumente/Projekte/P2M/OpenWasteWater/OpenWasteWater/Resources/ASM3/Fuerstenwalde.txt", gain = 1) annotation(
+      OpenWasteWater.ASM3.Inflow Inf(Inf_File = Modelica.Utilities.Files.loadResource("modelica://OpenWasteWater/Resources/ASM3/Fuerstenwalde.txt"), gain = 1) annotation(
         Placement(visible = true, transformation(origin = {-116, 88}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
       OpenWasteWater.ASM3.TechUnits.Blower B1(Qmax = 75000) annotation(
         Placement(visible = true, transformation(origin = {-60, 34}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
@@ -2373,7 +2373,7 @@ package ASM3 "Component models for the Activated Sludge Model No.3"
     end WWTP_Alternate;
 
     model WWTP_3Lane
-      OpenWasteWater.ASM3.Inflow Inf(Inf_File = "/home/awwjb/Git/OpenWasteWater/Resources/ASM3/Inf_rain.txt", T = 15) annotation(
+      OpenWasteWater.ASM3.Inflow Inf(Inf_File = Modelica.Utilities.Files.loadResource("modelica://OpenWasteWater/Resources/ASM3/Inf_rain.txt"), T = 15) annotation(
         Placement(visible = true, transformation(origin = {-118, 8}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
       OpenWasteWater.ASM3.Distributor3 distributor3 annotation(
         Placement(visible = true, transformation(origin = {-82, 2}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
@@ -2434,7 +2434,7 @@ package ASM3 "Component models for the Activated Sludge Model No.3"
         Placement(visible = true, transformation(origin = {66, -26}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
       OpenWasteWater.ASM3.TechUnits.Pump P_RS annotation(
         Placement(visible = true, transformation(origin = {-48, -70}, extent = {{10, -10}, {-10, 10}}, rotation = 0)));
-      OpenWasteWater.ASM3.InflowTV InfTV(Inf_File = "/home/awwjb/Dokumente/modellieren/modelica/LastWorkingOWW/OpenWasteWater/Resources/ASM3/Fuerstenwalde.txt") annotation(
+      OpenWasteWater.ASM3.InflowTV InfTV(Inf_File = Modelica.Utilities.Files.loadResource("modelica://OpenWasteWater/Resources/ASM3/Fuerstenwalde.txt")) annotation(
         Placement(visible = true, transformation(origin = {-96, 68}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
       OpenWasteWater.ASM3.AlternateTank R1(H = 4.5, Sini = Soluble(O2 = 4.0, I = 30, S = 1.15, NH = 1.2, N2 = 5.9, NO = 16.9, ALK = 4.54), V_R = 8800, Xini = Particulate(I = 78.0, S = 37.4, H = 1216.0, A = 136.0, STO = 208.0, SS = 2000.55)) annotation(
         Placement(visible = true, transformation(origin = {-28, 60}, extent = {{-12, -16}, {12, 16}}, rotation = 0)));
@@ -2495,7 +2495,7 @@ package ASM3 "Component models for the Activated Sludge Model No.3"
     model TestFuerstTest
       OpenWasteWater.ASM3.Effluent effluent annotation(
         Placement(visible = true, transformation(origin = {86, 58}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
-      OpenWasteWater.ASM3.InflowTV InfTV(Inf_File = "/home/awwjb/Dokumente/modellieren/modelica/LastWorkingOWW/OpenWasteWater/Resources/ASM3/Fuerstenwalde.txt") annotation(
+      OpenWasteWater.ASM3.InflowTV InfTV(Inf_File = Modelica.Utilities.Files.loadResource("modelica://OpenWasteWater/Resources/ASM3/Fuerstenwalde.txt")) annotation(
         Placement(visible = true, transformation(origin = {-96, 68}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
       OpenWasteWater.ASM3.AlternateTank R1(Sini = Soluble(O2 = 4.0, I = 30, S = 1.15, NH = 10.2, N2 = 5.9, NO = 16.9, ALK = 4.54), V_R = 20000, Xini = Particulate(I = 78.0, S = 37.4, H = 1216.0, A = 136.0, STO = 208.0, SS = 2000.55)) annotation(
         Placement(visible = true, transformation(origin = {-8, 68}, extent = {{-20, -28}, {20, 28}}, rotation = 0)));
